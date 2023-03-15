@@ -1,5 +1,11 @@
-/* eslint-disable prettier/prettier */
-import { Column, CreateDateColumn, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { TransactionEntity } from '../transactions/transaction.entity';
 
 @Entity()
@@ -14,8 +20,9 @@ export class CategoryEntity {
   type: 'profitable' | 'consumable';
 
   @CreateDateColumn()
-  createdAt: Date
+  createdAt: Date;
 
   @ManyToMany(() => TransactionEntity)
+  @JoinTable()
   transactions: TransactionEntity[];
 }

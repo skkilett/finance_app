@@ -6,6 +6,7 @@ import { BanksModule } from './banks/bank.module';
 import { TransactionsModule } from './transactions/transaction.module';
 import { CategoriesModule } from './categories/category.module';
 import { TypeOrmConfigService} from 'config/typeorm.config';
+import { WebhookModule } from './webhook/webhook.module';
 
 @Module({
   controllers: [],
@@ -20,6 +21,7 @@ import { TypeOrmConfigService} from 'config/typeorm.config';
     BanksModule,
     TransactionsModule,
     CategoriesModule,
+    WebhookModule,
   ],
 })
 export class AppModule {}

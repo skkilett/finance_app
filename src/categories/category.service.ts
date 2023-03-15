@@ -54,18 +54,19 @@ export class CategoriesService {
     if (!category) {
       throw new Error(`Category with id ${id} not found`);
     }
-    if (this.hasTransactions(id)) {
+    if (await this.hasTransactions(id)) {
       throw new Error(
         `Category with id ${id} has transactions and cannot be deleted`,
       );
     }
+    await this.categoryRepository.remove(category);
   }
 
   async hasTransactions(id: number): Promise<boolean> {
-    const bank = await this.categoryRepository.findOne({
+    const category = await this.categoryRepository.findOne({
       where: { id: id },
       relations: ['transactions'],
     });
-    return !!bank.transactions.length;
+    return !!category.transactions.length;
   }
 }

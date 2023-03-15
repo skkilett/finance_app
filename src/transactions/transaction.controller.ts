@@ -34,12 +34,13 @@ export class TransactionController {
   @ApiBadRequestResponse({ description: 'Bad Request' })
   @Post()
   async create(
-    @Body() transactionCreateDto: TransactionCreateDto,
+    @Body() createTransactionDto: any,
   ): Promise<TransactionResponseDto> {
+    const transactionCreateDto: TransactionCreateDto =
+      createTransactionDto.data;
     const transaction = await this.transactionService.createTransaction(
       transactionCreateDto,
     );
-    console.log(transaction.categories);
     return new TransactionResponseDto(transaction);
   }
 
@@ -69,7 +70,9 @@ export class TransactionController {
   }
 
   @Get('statistics')
+  @ApiOperation({ summary: 'Get statistics' })
   @ApiOkResponse({ type: StatisticsResponseDto })
+  @ApiBadRequestResponse({ description: 'Bad Request' })
   async getStatistics(
     @Body() statisticsRequestDto: StatisticsRequestDto,
   ): Promise<StatisticsResponseDto> {
