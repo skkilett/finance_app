@@ -46,7 +46,9 @@ $ npm run start:prod
 ```
 
 ## DockerHubRepo
-docker pull skkilett/codica-test-main:latest
+```bash
+$ docker pull skkilett/codica-test-main:latest
+```
 
 ## Support
 
